@@ -1,5 +1,6 @@
 import Transaction from "../../Models/TransactionSchema.js";
 import Category from "../../Models/CategorySchema.js";
+import { request } from "express";
 
 // Create a new transaction
 export const createTransaction = async (req, res) => {
@@ -11,7 +12,7 @@ export const createTransaction = async (req, res) => {
         }
 
         // Validate if the category exists in the database by name and type
-        const categoryExists = await Category.findOne({ name: category, type });
+        const categoryExists = await Category.findOne({ name: category, type,user:request.user._id });
         if (!categoryExists) {
             return res.status(404).json({ status: "fail", message: 'Category not found' });
         }
