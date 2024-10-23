@@ -10,11 +10,15 @@ This project is a Category and Transaction Management API built with Node.js and
 
 ## Features
 
-User Authentication: Users can register and log in to access their transactions and categories securely.
-Category Management: Users can create, read, update, and delete categories for their transactions.
-Transaction Management: Users can create, read, update, and delete transactions associated with categories.
-Monthly Spending Reports: Users can generate reports on their spending by category for any given month.
-Pagination for Transactions: Transactions can be paginated to handle large volumes of data.
+--User Authentication: Users can register and log in to access their transactions and categories securely.
+
+--Category Management: Users can create, read, update, and delete categories for their transactions.
+
+--Transaction Management: Users can create, read, update, and delete transactions associated with categories.
+
+--Monthly Spending Reports: Users can generate reports on their spending by category for any given month.
+
+--Pagination for Transactions: Transactions can be paginated to handle large volumes of data.
 
 ## Table of Contents
 
