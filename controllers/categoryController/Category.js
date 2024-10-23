@@ -48,6 +48,47 @@ export const getCategories = async (req, res) => {
         return res.status(500).json({status:"fail", message: error.message });
     }
 };
+export const getCategoryById = async (req, res) => {
+    try {
+        // Find the category by ID and ensure it belongs to the current user
+        const category = await Category.findOne({ _id: req.params.id, user: req.user._id });
+
+        if (!category) {
+            return res.status(404).json({ status: "fail", message: 'Category not found' });
+        }
+
+        return res.status(200).json({ status: "success", category }); // Return the found category
+    } catch (error) {
+        return res.status(500).json({ status: "fail", message: error.message });
+    }
+};
+
+// Update a category by ID
+export const updateCategory = async (req, res) => {
+    try {
+        const { name, type } = req.body;
+
+        // Validate the input type (should be either 'income' or 'expense')
+        if (type && !['income', 'expense'].includes(type)) {
+            return res.status(400).json({ status: "fail", message: 'Invalid category type. Must be either income or expense.' });
+        }
+
+        // Find the category by ID and ensure it belongs to the current user
+        const category = await Category.findOneAndUpdate(
+            { _id: req.params.id, user: req.user._id },
+            { name, type }, // Update category fields
+            { new: true, runValidators: true } // Return the updated document
+        );
+
+        if (!category) {
+            return res.status(404).json({ status: "fail", message: 'Category not found' });
+        }
+
+        return res.status(200).json({ status: "success", category }); // Return the updated category
+    } catch (error) {
+        return res.status(500).json({ status: "fail", message: error.message });
+    }
+};
 
 // Delete a category by ID
 export const deleteCategory = async (req, res) => {
