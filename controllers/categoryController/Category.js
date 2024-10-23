@@ -20,7 +20,7 @@ export const createCategory = async (req, res) => {
         const category = new Category({ name, type,user: req.user._id });
         await category.save();
 
-        res.status(201).json(category); // Return the created category
+        res.status(201).json({status: "success",category}); // Return the created category
     } catch (error) {
         return res.status(500).json({status:"fail", message: error.message });
     }
@@ -43,7 +43,7 @@ export const getCategories = async (req, res) => {
 
         // Find categories with optional type filter
         const categories = await Category.find(filter);
-        return res.status(200).json(categories); // Return all categories
+        return res.status(200).json({status: "success",categories}); // Return all categories
     } catch (error) {
         return res.status(500).json({status:"fail", message: error.message });
     }
@@ -59,7 +59,7 @@ export const deleteCategory = async (req, res) => {
             return res.status(404).json({status:"fail", message: 'Category not found' });
         }
 
-        return res.status(200).json({ message: 'Category deleted successfully' });
+        return res.status(200).json({status: "success", message: 'Category deleted successfully' });
     } catch (error) {
         return res.status(500).json({status:"fail", message: error.message });
     }
