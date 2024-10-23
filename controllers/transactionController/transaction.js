@@ -12,7 +12,7 @@ export const createTransaction = async (req, res) => {
         }
 
         // Validate if the category exists in the database by name and type
-        const categoryExists = await Category.findOne({ name: category, type,user:request.user._id });
+        const categoryExists = await Category.findOne({ name: category, type,user:req.user._id });
         if (!categoryExists) {
             return res.status(404).json({ status: "fail", message: 'Category not found' });
         }
