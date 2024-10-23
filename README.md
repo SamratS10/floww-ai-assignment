@@ -8,7 +8,8 @@ Sure! Here’s a sample README file for your Category and Transaction management
 
 This project is a Category and Transaction Management API built with Node.js and MongoDB. It allows users to manage their financial transactions by categorizing them as either income or expenses. Users can create, read, update, and delete categories and transactions, as well as generate monthly spending reports by category.
 
-##Features
+## Features
+
 User Authentication: Users can register and log in to access their transactions and categories securely.
 Category Management: Users can create, read, update, and delete categories for their transactions.
 Transaction Management: Users can create, read, update, and delete transactions associated with categories.
