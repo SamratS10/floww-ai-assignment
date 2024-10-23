@@ -11,13 +11,13 @@ export const createCategory = async (req, res) => {
         }
 
         // Check if the category already exists
-        const categoryExists = await Category.findOne({ name, type });
+        const categoryExists = await Category.findOne({ name, type,user: req.user._id });
         if (categoryExists) {
             return res.status(400).json({status:"fail", message: 'Category already exists.' });
         }
 
         // Create and save the new category
-        const category = new Category({ name, type });
+        const category = new Category({ name, type,user: req.user._id });
         await category.save();
 
         res.status(201).json(category); // Return the created category
@@ -31,7 +31,8 @@ export const getCategories = async (req, res) => {
     try {
         const { type } = req.query;
 
-        let filter = {};
+        //let filter = {};
+        let filter = { user: req.user._id };
         if (type) {
             // Ensure type is valid if provided in query string
             if (!['income', 'expense'].includes(type)) {
@@ -52,7 +53,7 @@ export const getCategories = async (req, res) => {
 export const deleteCategory = async (req, res) => {
     try {
         // Find and delete the category by ID
-        const category = await Category.findByIdAndDelete(req.params.id);
+        const category = await Category.findByIdAndDelete({_id:req.params.id,user: req.user._id });
 
         if (!category) {
             return res.status(404).json({status:"fail", message: 'Category not found' });
